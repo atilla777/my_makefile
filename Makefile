@@ -9,5 +9,5 @@ kibana:
 	docker run --rm --name kibana \
 	--net elastic \
 	-p 5601:5601 \
-	-e "ELASTICSEARCH_HOSTS=http://elasticsearch:9200" \
+	-e "ELASTICSEARCH_HOSTS=http://elastic:9200" \
 	docker.elastic.co/kibana/kibana:8.0.0
