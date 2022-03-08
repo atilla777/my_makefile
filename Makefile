@@ -19,3 +19,16 @@ nats:
 		-p 8222:8222 \
 		nats:2.7.3-alpine3.15 \
 		-js
+
+otel_collector:
+	docker run --rm --name otel_collector \
+		-v "${PWD}/otel-config.yaml":/otel-config.yaml \
+		-p 55681:55681 \
+		otel/opentelemetry-collector:0.46.0-amd64
+		--config otel-config.yaml;
+
+jaeger:
+	docker run --rm --name jaeger \
+		-p 14250:14250 \
+		-p 16686:16686 \
+		jaegertracing/all-in-one:1.32
