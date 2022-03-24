@@ -1,3 +1,12 @@
+postgresql:
+	docker run \
+    	--name postgres \
+    	-e POSTGRES_PASSWORD=password \
+    	-e PGDATA=/var/lib/postgresql/data/pgdata \
+    	-v ~/.docker_volumes/postgresql:/var/lib/postgresql/data \
+	-p 5432:5432 \
+    	postgres
+
 elasticsearch:
 	docker run --rm --name elastic \
 	 	--net elastic \
@@ -32,3 +41,9 @@ jaeger:
 		-p 14250:14250 \
 		-p 16686:16686 \
 		jaegertracing/all-in-one:1.32
+
+redis:
+	docker run --rm --name redis \
+		-p 6379:6379 \
+		redis:6.2-alpine3.15
+		
