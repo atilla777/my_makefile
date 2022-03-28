@@ -1,11 +1,21 @@
+ifdef version
+ver = :$(version) 
+volume_postfix = $(version)
+else
+ver = ''
+endif
+
+
 postgresql:
-	docker run \
-    	--name postgres \
+	echo "Start"
+	echo $(ver)
+	echo $(volume_postfix)
+	docker run --rm --name postgres \
     	-e POSTGRES_PASSWORD=password \
     	-e PGDATA=/var/lib/postgresql/data/pgdata \
-    	-v ~/.docker_volumes/postgresql:/var/lib/postgresql/data \
+    	-v ~/.docker_volumes/postgresql$(volume_postfix):/var/lib/postgresql/data \
 	-p 5432:5432 \
-    	postgres
+	postgres$(ver)
 
 elasticsearch:
 	docker run --rm --name elastic \
