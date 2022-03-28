@@ -5,7 +5,6 @@ else
 ver = ''
 endif
 
-
 postgresql:
 	echo "Start"
 	echo $(ver)
@@ -16,6 +15,14 @@ postgresql:
     	-v ~/.docker_volumes/postgresql$(volume_postfix):/var/lib/postgresql/data \
 	-p 5432:5432 \
 	postgres$(ver)
+
+pgadmin:
+	docker run --rm --name pgadmin \
+	-p 80:80
+	-v pgadmin-data:/var/lib/pgadmin
+	-e 'PGADMIN_DEFAULT_EMAIL=your_email@google.com'
+	-e 'PGADMIN_DEFAULT_PASSWORD=password'
+	dpage/pgadmin4
 
 elasticsearch:
 	docker run --rm --name elastic \
